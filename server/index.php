@@ -6,9 +6,9 @@
     $continentCountry = htmlspecialchars(trim($_POST["continentCountry"]));
 
     //Создаем и отправляем запрос в бд
-    $sql = "INSERT INTO Country SET name = '$nameCountry' ,continent = '$continentCountry' ";
+    $sql = "INSERT INTO Country SET name = :name ,continent = :cont ";
     $request = $dbh->prepare($sql);
-    $request->execute();
+    $request->execute([':name' => $nameCountry, ':cont' => $continentCountry]);
 
     //Редирект
     header("Location: http://interface/view/countrytable.php");
